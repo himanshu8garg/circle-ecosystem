@@ -31,7 +31,7 @@ fi
 
 
 ### Steps
-if [ $FILE == *.yml ] || [ $FILE == *.yaml ]  ; then
+if [ "$FILE" == *.yml ] || [ "$FILE" == *.yaml ]  ; then
     yamllint $FILE
 else
     echo "File $FILE does not exist or it isnt a yml or yaml file. Please check your file"

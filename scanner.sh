@@ -23,7 +23,7 @@ fi
 
 FILE="$1"
 
-if [ -f $FILE ]
+if [ -f "$FILE" ]
 then
     echo "$FILE exists."
 else
@@ -58,7 +58,7 @@ check_file_for_malware () {
 
 }
 
-if [ $FILE == *.jpg ] || [ $FILE == *.png ] || [ $FILE == *.svg ]  ; then
+if [ "$FILE" == *.jpg ] || [ "$FILE" == *.png ] || [ "$FILE" == *.svg ]  ; then
     check_file_for_malware
 else
     echo "File $FILE does not exist or it isn't a .jpg, .svg or .png file. Please check your file"
