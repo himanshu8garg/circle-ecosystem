@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (c) 2022 Circle Internet Financial Trading Company Limited.
 # All rights reserved.
