@@ -26,5 +26,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Upload file to S3
         env: # Or as an environment variable
-          BUCKET: ${{ secrets.S3BUCKET }}
-        run: ./s3_push.sh $BUCKET ecosystem_schema.yml
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: ./s3_push.sh test-himanshu ecosystem_schema.yml
