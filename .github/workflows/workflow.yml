@@ -25,7 +25,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Install yamllint package
-        run: apt-get install -y yamllint
+        run: sudo apt-get install -y yamllint
       - name: Run Linter
         run: ./linter.sh ecosystem_schema.yml
       # Runs a set of commands using the runners shell
