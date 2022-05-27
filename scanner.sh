@@ -31,7 +31,7 @@ else
     exit 1
 fi
 
-if [[ -z "${VIRUS_TOTAL_API_KEY}" ]]
+if [ -z "${VIRUS_TOTAL_API_KEY}" ]
 then
   echo "VIRUS_TOTAL_API_KEY env var not defined"
   exit 1
@@ -58,7 +58,7 @@ check_file_for_malware () {
 
 }
 
-if [ "$FILE" == *.jpg ] || [ "$FILE" == *.png ] || [ "$FILE" == *.svg ]  ; then
+if [[ $FILE == *.jpg ]] || [[ $FILE == *.png ]] || [[ $FILE == *.svg ]]  ; then
     check_file_for_malware
 else
     echo "File $FILE does not exist or it isn't a .jpg, .svg or .png file. Please check your file"
