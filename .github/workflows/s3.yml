@@ -25,4 +25,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Upload file to S3
-        run: ./s3_push.sh test-himanshu ecosystem_schema.yml
+        env: # Or as an environment variable
+          BUCKET: ${{ secrets.S3BUCKET }}
+        run: ./s3_push.sh $BUCKET ecosystem_schema.yml
