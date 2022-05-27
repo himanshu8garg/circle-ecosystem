@@ -10,21 +10,26 @@
 # of this source code or any related proprietary information is strictly
 # prohibited without the express written permission of Circle Internet Financial
 # Trading Company Limited.
-#
 
-## scanner.sh - Helper script to scan images using VirusTotalAPI
-## Requires VIRUS_TOTAL_API_KEY env var
-
-if [ $# -ne 1 ]
+if [ $# -ne 2 ]
 then
-    echo "Usage: $0 bucket name" >&2
+    echo "Usage: $0 bucket_name file_to_upload" >&2
     exit 1
 fi
 
-BUCKET=$1
+BUCKET="$1"
+FILE="$2"
 
+if [ -f "$FILE" ]
+then
+    echo "$FILE exists."
+else
+    echo "$FILE does not exist or isn't a file"
+    exit 1
+fi
 
-aws s3 sync catalog s3://$BUCKET/catalog --acl public-read --exclude "*" --include "*.yml" --include "*.yaml"
+aws s3 cp $FILE s3://$BUCKET/$FILE
+#aws s3 sync catalog s3://$BUCKET/catalog --acl public-read --exclude "*" --include "*.yml" --include "*.yaml"
 
 
 
