@@ -8,16 +8,17 @@ To contribute to this catalog, please propose a PR with the following files by f
 1. An image of your app / company logo
 2. A yaml file with the requested information about your app (one app per yaml file)
 
-### Logo Constraints
+## Logo Constraints
 Logos should conform to the following parameters:
 
 - Acceptable File Types: .jpg, .png, .svg
 - Image Size: 200 x 200 pixels
 - Aspect Ratio: 1:1 (square)
+- Max File Size: 5 MB
 
 Note: Each app does not need its own logo. Logos may be reused by multiple apps under the same company / org.
 
-### UUID Generation
+## UUID Generation
 For each app, please generate a UUID v4.
 
 On Mac OS X:
@@ -32,7 +33,7 @@ uuidgen
 
 You may also use an online tool to generate a UUID. (https://uuidonline.com/)
 
-### Directory Structure
+## Directory Structure
 ```
 circle-ecosystem
 └───catalog
@@ -47,10 +48,10 @@ circle-ecosystem
         ├───apps
         │     coinbaseWallet.yml
         └───logos
-              coinbaseWallet.jpg
+              coinbase.png
 ```
 
-### YAML Schema
+## YAML Schema
 ```yaml
 # Copyright 2022 Circle Internet Financial Trading Company Limited
 ---
@@ -62,7 +63,7 @@ title: Circle Ecosystem Catalog YAML Schema
 maintainers:
   - Thomas Low <thomas.low@circle.com>
 
-description: The YAML schema reference for the Circle Ecosystem Catalog.
+description: The YAML schema reference for Circle Ecosystem Catalog.
 
 type: object
 
@@ -70,31 +71,39 @@ properties:
   id:
     description: UUID of the app.
     type: string
+    minLength: 36
     maxLength: 36
+    pattern: "^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$"
 
   companyName:
     description: Name of the company.
     type: string
+    minLength: 1
     maxLength: 50
 
   appName:
     description: Name of the app.
     type: string
+    minLength: 1
     maxLength: 50
 
   logo:
     description: Directory path to the logo file.
     type: string
-    maxLength: 100
+    maxLength: 150
+    pattern: "catalog\\/.+\\/logos\\/.+\\.(png|jpg|jpeg|svg)$"
 
   website:
     description: URL of the app's website.
     type: string
+    minLength: 8
     maxLength: 100
+    pattern: "^https://.+"
 
   description:
     description: Description of the app.
     type: string
+    minLength: 1
     maxLength: 200
 
   dao:
@@ -182,17 +191,23 @@ properties:
   twitter:
     description: Twitter handle.
     type: string
-    maxLength: 50
+    minLength: 20
+    maxLength: 75
+    pattern: "^https://twitter.com/.+"
 
   telegram:
     description: Telegram handle.
     type: string
+    minLength: 13
     maxLength: 50
+    pattern: "^https://t.me/.+"
 
   discord:
     description: Discord server.
     type: string
+    minLength: 19
     maxLength: 50
+    pattern: "^https://discord.gg/.+"
 
 required:
   - id
@@ -200,17 +215,10 @@ required:
   - appName
   - logo
   - website
-  - description
-  - dao
-  - fiatOnRamp
-  - audiences
-  - blockchains
   - categories
-  - platforms
-  - regions
 ```
 
-### YAML Example (coinbaseWallet.yml)
+## YAML Example (coinbaseWallet.yml)
 ```yaml
 ---
 id: "27d0cea3-d1d2-423e-b9a7-b849eaf79ac3"
@@ -250,4 +258,10 @@ regions:
   - emea
   - apac
 twitter: "https://twitter.com/coinbase"
+```
+
+## Linting
+```shell
+$ pip install -r requirements.txt
+$ python linter.py
 ```
