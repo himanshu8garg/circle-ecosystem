@@ -22,12 +22,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Install yamllint package
-        run: sudo apt-get install -y yamllint
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Run Linter
-        run: ./linter.sh ecosystem_schema.yml
-        
+        run: ./linter.py
+
   virus_scanner:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -36,7 +37,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      
+
       - name: Run Virus Scanner
         env: # Or as an environment variable
           VIRUS_TOTAL_API_KEY: ${{ secrets.VIRUS_TOTAL_API_KEY }}
