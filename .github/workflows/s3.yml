@@ -27,5 +27,5 @@ jobs:
 
       - name: Upload file to S3
         env:
-          BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
-        run: aws s3 sync catalog s3://$BUCKET_NAME/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        run: aws s3 sync catalog s3://$S3_BUCKET/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
