@@ -9,7 +9,7 @@ on:
 permissions:
   id-token: write
   contents: read
-  
+
 jobs:
   s3_push:
     runs-on: ubuntu-latest
@@ -26,4 +26,6 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-service-role
 
       - name: Upload file to S3
-        run: aws s3 sync catalog s3://${{ secrets.BUCKET_NAME }}/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
+        env:
+          BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+        run: aws s3 sync catalog s3://$BUCKET_NAME/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
