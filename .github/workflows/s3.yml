@@ -23,6 +23,4 @@ jobs:
             role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-service-role
 
       - name: Upload file to S3
-        env:
-          BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
-        run: aws s3 sync catalog s3://$BUCKET_NAME/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
+        run: aws s3 sync catalog s3://${{ secrets.BUCKET_NAME }}/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
