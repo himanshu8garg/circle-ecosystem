@@ -32,7 +32,12 @@ jobs:
           S3_BUCKET_SANDBOX: ${{ secrets.S3_BUCKET_SANDBOX }}
           S3_BUCKET_STG: ${{ secrets.S3_BUCKET_STG }}
         run: |
+          echo "Uploading to S3 in PROD"
           aws s3 sync catalog s3://"$S3_BUCKET_PROD"/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
+          echo "Uploading to S3 in SMOKEBOX"
           aws s3 sync catalog s3://"$S3_BUCKET_SMOKEBOX"/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
-          aws s3 sync catalog s3://"$S3_BUCKET_SANDBOX"/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
+          echo "Uploading to S3 in STG"
           aws s3 sync catalog s3://"$S3_BUCKET_STG"/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
+          echo "Uploading to S3 in SANDBOX"
+          aws s3 sync catalog s3://"$S3_BUCKET_SANDBOX"/catalog/ --exclude "*" --include "*.yml" --include "*.yaml"
+
